@@ -1,0 +1,25 @@
+version: '3.0'
+services:
+    front:
+        user: root
+        build:
+            context: ./front
+            dockerfile: dockerfile
+        restart: always
+        volumes:
+            - "~/powergate-front:/usr/share/nginx/html"
+        networks:
+            net:
+                ipv4_address: 172.19.0.2
+        container_name: powergate-front
+        hostname: powergate-front
+        image: powergate/front
+
+networks:
+    net:
+        driver: bridge
+        ipam:
+            driver: default
+            config:
+            -
+              subnet: 172.19.0.0/24
